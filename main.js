@@ -1,4 +1,6 @@
-import { Application , Graphics, Text} from "pixi.js";
+import { Application , Graphics, Text, Assets, Sprite} from "pixi.js";
+
+import { initDevtools } from "@pixi/devtools";
 
 
 (async()=> {
@@ -23,9 +25,22 @@ import { Application , Graphics, Text} from "pixi.js";
             align: "center",
         },
     });
-    
 
+
+    initDevtools({app});
+    const texture = await Assets.load('/public/MC.jpg');
+    const sprite = new Sprite(texture);
+
+    TextBox.eventMode = "static";
+    TextBox.on("click", () => {
+        TextBox.fill({0xff0000 : 0.5})
+        .stroke({color: 0x0000ff, width: 2});
+    });
+
+    
+    
     app.canvas.style.position = "absolute";
+    app.stage.addChild(sprite);
     app.stage.addChild(Title);
     app.stage.addChild(TextBox);
     
