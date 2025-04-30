@@ -1,50 +1,34 @@
-import { Application , Graphics, Text, Assets, Sprite} from "pixi.js";
+import { Application, Assets, Sprite } from "pixi.js";
+import { createDialogueUI } from "./components/dialogueBox.js";
+import { createBackground } from "./components/handleBackground.js";
 
-import { initDevtools } from "@pixi/devtools";
-
-
-(async()=> {
-
-    const app = new Application()
-
-    await app.init({
-        resizeTo:window,
-       
-    });
-
-    const TextBox = new Graphics()
-    .rect(675, 260, 50, 150)
-    .fill({0xffea00 : 0.5})
-    .stroke({color: 0x00ff00, width: 2});
-
-    const Title = new Text({
-        text: "Visual Novel",
-        style: {
-            fontSize: 36,
-            fill: 0xffffff,
-            align: "center",
-        },
-    });
-
-
-    initDevtools({app});
-    const texture = await Assets.load('/public/MC.jpg');
-    const sprite = new Sprite(texture);
-
-    TextBox.eventMode = "static";
-    TextBox.on("click", () => {
-        TextBox.fill({0xff0000 : 0.5})
-        .stroke({color: 0x0000ff, width: 2});
-    });
-
-    
-    
-    app.canvas.style.position = "absolute";
-    app.stage.addChild(sprite);
-    app.stage.addChild(Title);
-    app.stage.addChild(TextBox);
-    
+(async () => {
+    const app = new Application();
+    await app.init( {resizeTo: window});
+    let background = await createBackground(app);
+     app.stage.addChild(background);
 
     document.body.appendChild(app.canvas);
 
+   
+    const MC_Asset = await Assets.load("/public/MC.jpg");
+    const MC_Sprite = new Sprite(MC_Asset);
+    MC_Sprite.x = 100; 
+    MC_Sprite.y = 50;
+   
+
+    
+    const script = [
+        "Welcome to the world of Pixi Visual Novels.",
+        "This is your first line of dialogue.",
+        "Try clicking to continue."
+    ];
+
+    const { container, showNextLine } = createDialogueUI(script);
+    app.stage.addChild(container);
+    app.canvas.addEventListener('pointerdown', showNextLine);
+  
+    app.stage.addChild(MC_Sprite);
+    showNextLine();
+    
 })();
