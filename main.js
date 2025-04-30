@@ -25,10 +25,10 @@ import { createBackground } from "./components/handleBackground.js";
     ];
 
     const { container, showNextLine } = createDialogueUI(script);
+    app.stage.addChild(MC_Sprite);
     app.stage.addChild(container);
     app.canvas.addEventListener('pointerdown', showNextLine);
   
-    app.stage.addChild(MC_Sprite);
     showNextLine();
     
 })();
