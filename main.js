@@ -1,5 +1,5 @@
 import { Application, Assets, Sprite } from "pixi.js";
-import { createDialogueUI } from "./components/dialogueBox.js";
+
 import { createBackground } from "./components/handleBackground.js";
 
 (async () => {
@@ -24,11 +24,11 @@ import { createBackground } from "./components/handleBackground.js";
         "Try clicking to continue."
     ];
 
-    const { container, showNextLine } = createDialogueUI(script);
+    const { container, handleDialogue } = createDialogueUI(script);
     app.stage.addChild(MC_Sprite);
     app.stage.addChild(container);
-    app.canvas.addEventListener('pointerdown', showNextLine);
+    app.canvas.addEventListener('pointerdown', handleDialogue);
   
-    showNextLine();
+    handleDialogue();
     
 })();

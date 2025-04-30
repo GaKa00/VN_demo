@@ -28,7 +28,7 @@ export function createDialogueUI(script, onEnd) {
 
     let currentLine = 0;
 
-    function showNextLine() {
+    function handleDialogue() {
         if (currentLine < script.length) {
             dialogueText.text = script[currentLine];
             currentLine++;
@@ -39,7 +39,7 @@ export function createDialogueUI(script, onEnd) {
 
     return {
         container,      
-        showNextLine,
+        hand,
     };
 }
 
