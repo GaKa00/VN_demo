@@ -18,11 +18,14 @@ import { createBackground } from "./components/handleBackground.js";
    
 
     
-    const script = [
-        "Welcome to the world of Pixi Visual Novels.",
-        "This is your first line of dialogue.",
-        "Try clicking to continue."
-    ];
+const loadDialogueScript = async (act, character) => {
+    const response = await fetch(`/data/${act}/${character}.json`);
+    const data = await response.json();
+    return data.script;
+};
+
+
+
 
     const { container, handleDialogue } = createDialogueUI(script);
     app.stage.addChild(MC_Sprite);

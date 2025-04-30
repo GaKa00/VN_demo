@@ -1,3 +1,12 @@
-[{
-{id:0, }
-}]
+[
+    { "id": 0, "message": "Welcome to the game!", "next": 1 },
+    { "id": 1, "message": "Do you want to read the tutorial?", "choices": [
+      { "text": "Yes", "next": 2 },
+      { "text": "No", "next": 10 }
+    ]},
+    { "id": 2, "message": "Great! Let's begin.", "next": 3 },
+    { "id": 3, "message": "Click anywhere to continue.", "next": 4 },
+    { "id": 4, "message": "That's it for the basics!", "next": null },
+    { "id": 10, "message": "Come back when you're ready.", "next": null }
+  ]
+  
